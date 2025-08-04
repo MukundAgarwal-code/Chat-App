@@ -20,11 +20,14 @@ const PORT = process.env.PORT || 5000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-const corsOption = {
-    origin: 'http://localhost:3000',
-    credentials: true
+const corsOptions = {
+  origin: (origin, callback) => {
+    callback(null, origin || true);  // Allow all origins dynamically
+  },
+  credentials: true,  // Allow cookies/auth headers
 };
-app.use(cors(corsOption));
+
+app.use(cors(corsOptions));
 
 // Routes
 app.use("/api/v1/user", userRoute);

@@ -23,8 +23,8 @@ app.use(cookieParser());
 const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
-      "http://localhost:3000",
-      "https://chat-app-k2sv.onrender.com"
+      "https://chat-app-k2sv.onrender.com",
+      "http://localhost:3000"
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, origin);

@@ -22,9 +22,17 @@ app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
   origin: (origin, callback) => {
-    callback(null, origin || true);  // Allow all origins dynamically
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "https://chat-app-k2sv.onrender.com"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
   },
-  credentials: true,  // Allow cookies/auth headers
+  credentials: true
 };
 
 app.use(cors(corsOptions));
